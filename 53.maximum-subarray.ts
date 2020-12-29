@@ -5,18 +5,27 @@
  */
 
 // @lc code=start
-function maxSubArray(nums: number[]): number {
-    const len = nums.length;
-    let max = -2 * Math.pow(10, 32);
+// function maxSubArray(nums: number[]): number {
+//     const len = nums.length;
+//     let max = -2 * Math.pow(10, 32);
 
-    for (let i=0; i< len; i++) {
-        let sum = 0;
-        for (let j=i; j< len; j++) {
-            sum += nums[j];
-            max = Math.max(sum, max);
-        }
+//     for (let i=0; i< len; i++) {
+//         let sum = 0;
+//         for (let j=i; j< len; j++) {
+//             sum += nums[j];
+//             max = Math.max(sum, max);
+//         }
+//     }
+//     return max;
+// };
+
+// copy from https://leetcode.com/problems/maximum-subarray/discuss/139218/Javascript-very-clear-and-short-DP-solution
+var maxSubArray = function(nums) {
+    for (let i = 1; i < nums.length; i++){
+        nums[i] = Math.max(nums[i], nums[i] + nums[i - 1]);
     }
-    return max;
+    console.log(nums);
+    return Math.max(...nums);
 };
 // @lc code=end
 
