@@ -3,36 +3,49 @@
  *
  * [70] Climbing Stairs
  */
+// 答え見なかったらわからんかった
+// i-1とi-2の足し算て、問題文から気付けるのか？
+// プロコンあるある問題として閃けばいいんだろうか。
+// まだわからない。
 
 // @lc code=start
+
 function climbStairs(n: number): number {
-    return 0;
+    let arr = [1,2,3];
+    let i: number;
+
+    for(i = 3; i<=n; i++) {
+        arr[i] = arr[i-1] + arr[i-2];
+    }
+
+    return arr[n-1];
 };
 
-function calcCombination(n:number, k:number):number  {
-    if (n == k) return 1;
-    let upper = n;
-    let i = 1;
-    while(i <= k+1) {
-        console.log([n, i])
-        upper *= (n- i++)
-    }
-    let lower = k;
-    let j = 1;
-    while(k - j > 0) {
-        lower *= (k - j++) 
-    }
-    return upper / lower;
-}
+// memo 化アプローチ
+// const memo = [];
+// function climbStairs(n: number): number {
+//     if (n <= 0) {
+//         return 0;
+//     }
+//     if (n === 1) {
+//         return 1;
+//     }
+//     if (n === 2) {
+//         return 2;
+//     }
+//     if(memo[n]) {
+//         return memo[n];
+//     }
+//     memo[n] = climbStairs(n -1) + climbStairs(n-2);
+//     return memo[n]
+// };
+
 // @lc code=end
 
-test('calcCombination', ()=> {
-    expect(calcCombination(1, 1)).toBe(1);
-    expect(calcCombination(2, 1)).toBe(2);
-    expect(calcCombination(3, 1)).toBe(3);
-    expect(calcCombination(4, 1)).toBe(4);
-
-    expect(calcCombination(2, 2)).toBe(1);
-    expect(calcCombination(3, 2)).toBe(2);
-    expect(calcCombination(4, 2)).toBe(3);
-})
+test('basic', ()=> {
+    expect(climbStairs(1)).toBe(1);
+    expect(climbStairs(2)).toBe(2);
+    expect(climbStairs(3)).toBe(3);
+    expect(climbStairs(4)).toBe(5);
+    expect(climbStairs(5)).toBe(8);
+} )
